@@ -15,7 +15,7 @@ def mgs(A):
             R[i, j] = np.matmul(Q[:, i].T, V[:,j])
             V[:, j] = V[:, j]-R[i, j]*Q[:, i]
     return Q, R
-def mat0(m, n):
+def mat0(m, n, rho):
     rand_orth = ortho_group.rvs(m)
     Q0 = rand_orth[:,:n]
     rand_norm = np.random.normal(0, .1, size=(np.sum(np.arange(1, n)), 1))
@@ -30,7 +30,7 @@ def mat0(m, n):
                 k += 1
     diag_list = []
     for i in range(n):
-        diag_list.append(2**(-i-1))
+        diag_list.append(rho**(-i-1))
     S = np.diagflat([diag_list])
     R0 = np.matmul(S, R)
     return np.matmul(Q0, R0), Q0, R0
@@ -49,28 +49,29 @@ def error(m, n):
         ground_error.append(np.linalg.norm(mat2, 2))
     return orth_error, ground_error
 
-m = 40
-n = 40
-arr = np.empty([0, 3])
-arr2 = np.empty([0, 3])
-for i in range(20):
-    orth_error, ground_error = error(m, n)
-    arr = np.vstack((arr, orth_error))
-    arr2 = np.vstack((arr2, ground_error))
-orth_mean_mgs = np.mean(arr[:,0])
-orth_mean_clgs = np.mean(arr[:,1])
-orth_mean_std = np.mean(arr[:,2])
-orth_std_mgs = np.std(arr[:,0])
-orth_std_clgs = np.std(arr[:,1])
-orth_std_std = np.std(arr[:,2])
-print(orth_mean_mgs, orth_mean_clgs, orth_mean_std)
-print(orth_std_mgs, orth_std_clgs, orth_std_std)
-ground_mean_mgs = np.mean(arr2[:, 0])
-ground_mean_clgs = np.mean(arr2[:, 1])
-ground_mean_std = np.mean(arr2[:, 2])
-ground_std_mgs = np.std(arr2[:, 0])
-ground_std_clgs = np.std(arr2[:, 1])
-ground_std_std = np.std(arr2[:, 2])
-print('')
-print(ground_mean_mgs, ground_mean_clgs, ground_mean_std)
-print(ground_std_mgs, ground_std_clgs, ground_std_std)
+
+# m = 40
+# n = 40
+# arr = np.empty([0, 3])
+# arr2 = np.empty([0, 3])
+# for i in range(20):
+#     orth_error, ground_error = error(m, n)
+#     arr = np.vstack((arr, orth_error))
+#     arr2 = np.vstack((arr2, ground_error))
+# orth_mean_mgs = np.mean(arr[:,0])
+# orth_mean_clgs = np.mean(arr[:,1])
+# orth_mean_std = np.mean(arr[:,2])
+# orth_std_mgs = np.std(arr[:,0])
+# orth_std_clgs = np.std(arr[:,1])
+# orth_std_std = np.std(arr[:,2])
+# print(orth_mean_mgs, orth_mean_clgs, orth_mean_std)
+# print(orth_std_mgs, orth_std_clgs, orth_std_std)
+# ground_mean_mgs = np.mean(arr2[:, 0])
+# ground_mean_clgs = np.mean(arr2[:, 1])
+# ground_mean_std = np.mean(arr2[:, 2])
+# ground_std_mgs = np.std(arr2[:, 0])
+# ground_std_clgs = np.std(arr2[:, 1])
+# ground_std_std = np.std(arr2[:, 2])
+# print('')
+# print(ground_mean_mgs, ground_mean_clgs, ground_mean_std)
+# print(ground_std_mgs, ground_std_clgs, ground_std_std)
