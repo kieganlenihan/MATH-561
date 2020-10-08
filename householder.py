@@ -21,28 +21,28 @@ def house(A):
         R = H @ R
         Q = H @ Q
     return Q[:n].T, np.triu(R[:n])
-m = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-# n = 40
-ho, gi = [], []
-for r in m:
-    A,_,_ = mat0(r, r, 2)
-    start = time.time()
-    Q, R = house(A)
-    ho.append(time.time()-start)
-    start = time.time()
-    Q, R = givens_QR(A)
-    gi.append(time.time()-start)
-import matplotlib.pyplot as plt
-plt.yscale('log')
-leg = ['Householder', 'Givens']
-plt.plot(m, ho, 'ro')
-plt.plot(m, gi, 'bo')
-plt.legend(leg, loc = 'best')
-plt.grid()
-plt.xlabel('n')
-plt.ylabel('Time (s)')
-plt.savefig('time_giv_ho.png')
-plt.show()
+# m = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+# # n = 40
+# ho, gi = [], []
+# for r in m:
+#     A,_,_ = mat0(r, r, 2)
+#     start = time.time()
+#     Q, R = house(A)
+#     ho.append(time.time()-start)
+#     start = time.time()
+#     Q, R = givens_QR(A)
+#     gi.append(time.time()-start)
+# import matplotlib.pyplot as plt
+# plt.yscale('log')
+# leg = ['Householder', 'Givens']
+# plt.plot(m, ho, 'ro')
+# plt.plot(m, gi, 'bo')
+# plt.legend(leg, loc = 'best')
+# plt.grid()
+# plt.xlabel('n')
+# plt.ylabel('Time (s)')
+# plt.savefig('time_giv_ho.png')
+# plt.show()
 
 # print('r', R)
 # # print(R)
