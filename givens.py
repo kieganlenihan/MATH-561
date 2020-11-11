@@ -1,7 +1,6 @@
 import numpy as np
 import math
 import copy
-from mgs import *
 
 def givensrotation(a, b):
     if b == 0:
